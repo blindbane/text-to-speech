@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import PlayButton from './player/PlayButton';
-import StopButton from './player/StopButton';
-import PauseButton from './player/PauseButton';
-import ResumeButton from './player/ResumeButton';
+import PlayerController from './PlayerController';
 
 class Player extends Component {
   constructor(props) {
@@ -46,17 +43,13 @@ class Player extends Component {
         <div>
           Reader Voice: <strong>{this.state.voice.name}</strong>
         </div>
-        <div>
-          <PlayButton
-            voices={this.state.voices}
-            voice={this.state.voice}
-            rate={this.state.rate}
-            text={this.props.text}
-          />
-          <PauseButton />
-          <ResumeButton />
-          <StopButton />
-        </div>
+        <PlayerController
+          voices={this.state.voices}
+          voice={this.state.voice}
+          rate={this.state.rate}
+          text={this.props.text}
+          handleRateChange={this.handleRateChange}
+        />
         <div>
           <label>
             Select Voice:
@@ -71,22 +64,6 @@ class Player extends Component {
                     {voice.name + ' ' + voice.lang}
                   </option>
                 ))}
-            </select>
-          </label>
-        </div>
-        <div>
-          <label>
-            Speed:
-            <select value={this.state.rate} onChange={this.handleRateChange}>
-              <option key="slow" value={0.75}>
-                Slow
-              </option>
-              <option key="normal" value={1.0}>
-                Normal
-              </option>
-              <option key="fast" value={2.0}>
-                Fast
-              </option>
             </select>
           </label>
         </div>
