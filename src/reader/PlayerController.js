@@ -3,6 +3,7 @@ import PlayButton from './playerButtons/PlayButton';
 import StopButton from './playerButtons/StopButton';
 import PauseButton from './playerButtons/PauseButton';
 import ResumeButton from './playerButtons/ResumeButton';
+import VoiceRateControl from './VoiceRateControl';
 
 const PlayerController = props => {
   return (
@@ -16,22 +17,10 @@ const PlayerController = props => {
       <PauseButton />
       <ResumeButton />
       <StopButton />
-      <div>
-        <label>
-          Speed:
-          <select value={props.rate} onChange={props.handleRateChange}>
-            <option key="slow" value={0.75}>
-              Slow
-            </option>
-            <option key="normal" value={1.0}>
-              Normal
-            </option>
-            <option key="fast" value={2.0}>
-              Fast
-            </option>
-          </select>
-        </label>
-      </div>
+      <VoiceRateControl
+        rate={props.rate}
+        handleRateChange={props.handleRateChange}
+      />
     </div>
   );
 };
