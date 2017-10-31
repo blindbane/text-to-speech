@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PlayerController from './PlayerController';
 import VoiceRateControl from './VoiceRateControl';
+import SelectVoiceControl from './SelectVoiceControl';
 
 class Player extends Component {
   constructor(props) {
@@ -55,23 +56,11 @@ class Player extends Component {
           rate={this.state.rate}
           handleRateChange={this.handleRateChange}
         />
-        <div>
-          <label>
-            Select Voice:
-            <select
-              value={this.state.voice.name}
-              onChange={this.handleVoiceSelect}
-            >
-              {this.state.voices
-                .filter(lang => lang.lang === 'en-US')
-                .map(voice => (
-                  <option key={voice.name} value={voice.name}>
-                    {voice.name + ' ' + voice.lang}
-                  </option>
-                ))}
-            </select>
-          </label>
-        </div>
+        <SelectVoiceControl
+          voices={this.state.voices}
+          voice={this.state.voice}
+          handleVoiceSelect={this.handleVoiceSelect}
+        />
       </div>
     );
   }
