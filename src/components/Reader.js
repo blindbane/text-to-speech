@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Player from './../player/Player';
+import Player from './player/Player';
 
 class Reader extends Component {
   constructor(props) {
@@ -18,16 +18,16 @@ class Reader extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         <Player text={this.state.textAreaValue} />
-        <p className="App-intro">
+        <div>
           <textarea
             onChange={this.handleTextInput}
             value={this.state.textAreaValue}
             cols="100"
             rows="30"
           />
-        </p>
+        </div>
       </div>
     );
   }
