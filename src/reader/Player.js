@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import PlayButton from './player/PlayButton';
+import StopButton from './player/StopButton';
+import PauseButton from './player/PauseButton';
+import ResumeButton from './player/ResumeButton';
 
 class Player extends Component {
   constructor(props) {
@@ -10,10 +14,6 @@ class Player extends Component {
     };
     this.handleVoiceSelect = this.handleVoiceSelect.bind(this);
     this.handleRateChange = this.handleRateChange.bind(this);
-    this.read = this.read.bind(this);
-    this.pause = this.pause.bind(this);
-    this.resume = this.resume.bind(this);
-    this.cancel = this.cancel.bind(this);
   }
 
   componentDidMount() {
@@ -40,28 +40,6 @@ class Player extends Component {
     this.setState({ rate: event.target.value });
   }
 
-  read(event) {
-    var utterance = new SpeechSynthesisUtterance(this.props.text);
-    utterance.voice = this.state.voices.find(
-      voice => voice.name === this.state.voice.name
-    );
-    utterance.rate = this.state.rate;
-    console.log(utterance.rate);
-    window.speechSynthesis.speak(utterance);
-  }
-
-  pause() {
-    window.speechSynthesis.pause();
-  }
-
-  resume() {
-    window.speechSynthesis.resume();
-  }
-
-  cancel() {
-    window.speechSynthesis.cancel();
-  }
-
   render() {
     return (
       <div>
@@ -69,10 +47,15 @@ class Player extends Component {
           Reader Voice: <strong>{this.state.voice.name}</strong>
         </div>
         <div>
-          <button onClick={this.read}>Start Talking</button>
-          <button onClick={this.pause}>Pause</button>
-          <button onClick={this.resume}>Resume</button>
-          <button onClick={this.cancel}>Stop</button>
+          <PlayButton
+            voices={this.state.voices}
+            voice={this.state.voice}
+            rate={this.state.rate}
+            text={this.props.text}
+          />
+          <PauseButton />
+          <ResumeButton />
+          <StopButton />
         </div>
         <div>
           <label>
