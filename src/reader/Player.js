@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 
-class Reader extends Component {
+class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      textAreaValue: 'Call me Ishmael.',
       voices: [],
       voice: '',
       rate: 1
     };
     this.handleVoiceSelect = this.handleVoiceSelect.bind(this);
     this.handleRateChange = this.handleRateChange.bind(this);
-    this.handleTextInput = this.handleTextInput.bind(this);
     this.read = this.read.bind(this);
     this.pause = this.pause.bind(this);
     this.resume = this.resume.bind(this);
@@ -42,14 +40,8 @@ class Reader extends Component {
     this.setState({ rate: event.target.value });
   }
 
-  handleTextInput(event) {
-    this.setState({
-      textAreaValue: event.target.value
-    });
-  }
-
   read(event) {
-    var utterance = new SpeechSynthesisUtterance(this.state.textAreaValue);
+    var utterance = new SpeechSynthesisUtterance(this.props.text);
     utterance.voice = this.state.voices.find(
       voice => voice.name === this.state.voice.name
     );
@@ -72,15 +64,16 @@ class Reader extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h2>
+      <div>
+        <div>
           Reader Voice: <strong>{this.state.voice.name}</strong>
-        </h2>
-
-        <button onClick={this.read}>Start Talking</button>
-        <button onClick={this.pause}>Pause</button>
-        <button onClick={this.resume}>Resume</button>
-        <button onClick={this.cancel}>Stop</button>
+        </div>
+        <div>
+          <button onClick={this.read}>Start Talking</button>
+          <button onClick={this.pause}>Pause</button>
+          <button onClick={this.resume}>Resume</button>
+          <button onClick={this.cancel}>Stop</button>
+        </div>
         <div>
           <label>
             Select Voice:
@@ -114,17 +107,9 @@ class Reader extends Component {
             </select>
           </label>
         </div>
-        <p className="App-intro">
-          <textarea
-            onChange={this.handleTextInput}
-            value={this.state.textAreaValue}
-            cols="100"
-            rows="30"
-          />
-        </p>
       </div>
     );
   }
 }
 
-export default Reader;
+export default Player;
