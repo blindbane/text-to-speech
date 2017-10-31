@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PlayerController from './PlayerController';
+import VoiceRateControl from './VoiceRateControl';
 
 class Player extends Component {
   constructor(props) {
@@ -48,6 +49,10 @@ class Player extends Component {
           voice={this.state.voice}
           rate={this.state.rate}
           text={this.props.text}
+          handleRateChange={this.handleRateChange}
+        />
+        <VoiceRateControl
+          rate={this.state.rate}
           handleRateChange={this.handleRateChange}
         />
         <div>

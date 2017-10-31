@@ -3,7 +3,6 @@ import PlayButton from './playerButtons/PlayButton';
 import StopButton from './playerButtons/StopButton';
 import PauseButton from './playerButtons/PauseButton';
 import ResumeButton from './playerButtons/ResumeButton';
-import VoiceRateControl from './VoiceRateControl';
 
 const PlayerController = props => {
   return (
@@ -17,10 +16,6 @@ const PlayerController = props => {
       <PauseButton />
       <ResumeButton />
       <StopButton />
-      <VoiceRateControl
-        rate={props.rate}
-        handleRateChange={props.handleRateChange}
-      />
     </div>
   );
 };

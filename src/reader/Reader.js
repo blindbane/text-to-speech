@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Player from './Player';
+import Player from './../player/Player';
 
 class Reader extends Component {
   constructor(props) {
@@ -7,7 +7,6 @@ class Reader extends Component {
     this.state = {
       textAreaValue: 'Call me Ishmael.'
     };
-
     this.handleTextInput = this.handleTextInput.bind(this);
   }
 
