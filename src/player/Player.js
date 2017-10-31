@@ -28,7 +28,6 @@ class Player extends Component {
   }
 
   handleVoiceSelect(event) {
-    event.preventDefault();
     const newVoice = this.state.voices.find(
       voice => voice.name === event.target.value
     );
@@ -42,9 +41,6 @@ class Player extends Component {
   render() {
     return (
       <div>
-        <div>
-          Reader Voice: <strong>{this.state.voice.name}</strong>
-        </div>
         <PlayerController
           voices={this.state.voices}
           voice={this.state.voice}
