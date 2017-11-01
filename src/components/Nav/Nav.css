@@ -1,8 +1,12 @@
 .Nav {
+  text-align: left;
+  padding-left: 5%;
+  padding-right: 5%;
   background-color: darkblue;
 }
 
 .Nav__link {
   color: #fff;
   text-decoration: none;
+  padding-right: 0.7em;
 }
