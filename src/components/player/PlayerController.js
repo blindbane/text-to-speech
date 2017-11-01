@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import PlayButton from './playerButtons/PlayButton';
-import StopButton from './playerButtons/StopButton';
-import PauseButton from './playerButtons/PauseButton';
-import ResumeButton from './playerButtons/ResumeButton';
+import Button from './../shared/Button/Button.js';
+import synth from './speechUtils/SpeechSynth';
 
 import createSpeechUtterance from './speechUtils/createSpeechUtterance';
 
@@ -13,72 +11,66 @@ class PlayerController extends Component {
       isPlaying: false,
       isPaused: false
     };
-    this.handlePlayClick = this.handlePlayClick.bind(this);
-    this.handleStop = this.handleStop.bind(this);
-    this.handlePauseClick = this.handlePauseClick.bind(this);
-    this.handleResumeClick = this.handleResumeClick.bind(this);
+    this.play = this.play.bind(this);
+    this.stop = this.stop.bind(this);
+    this.pause = this.pause.bind(this);
+    this.resume = this.resume.bind(this);
   }
 
-  handlePlayClick() {
+  play(utterance) {
     this.setState({
       isPlaying: true
     });
+    synth.play(utterance);
   }
 
-  handleStop() {
+  stop() {
     this.setState({
       isPlaying: false,
       isPaused: false
     });
+    synth.stop();
   }
 
-  handlePauseClick() {
+  pause() {
     this.setState({
       isPaused: true
     });
+    synth.pause();
   }
 
-  handleResumeClick() {
+  resume() {
     this.setState({
       isPaused: false
     });
+    synth.resume();
   }
 
   render() {
+    const { text, rate, voice, voices } = this.props;
     const utterance = createSpeechUtterance(
-      this.props.text,
-      this.props.rate,
-      this.props.voice,
-      this.props.voices,
-      this.handleStop
+      text,
+      rate,
+      voice,
+      voices,
+      this.stop
     );
+    const { isPaused, isPlaying } = this.state;
     return (
       <div>
-        {!this.state.isPlaying && (
-          <PlayButton
-            handlePlayClick={this.handlePlayClick}
-            utterance={utterance}
-          />
+        {!isPlaying && (
+          <Button handleClick={() => this.play(utterance)} name="Play" />
         )}
-        {this.state.isPlaying &&
-          !this.state.isPaused && (
-            <PauseButton handlePauseClick={this.handlePauseClick} />
+        {isPlaying &&
+          !isPaused && <Button handleClick={() => this.pause()} name="Pause" />}
+        {isPlaying &&
+          isPaused && (
+            <Button handleClick={() => this.resume()} name="Resume" />
           )}
-        {this.state.isPlaying &&
-          this.state.isPaused && (
-            <ResumeButton handleResumeClick={this.handleResumeClick} />
-          )}
-        {this.state.isPlaying && (
-          <StopButton handleStopClick={this.handleStop} />
-        )}
+        {isPlaying && <Button handleClick={() => this.stop()} name="Stop" />}
       </div>
     );
   }
 }
 
 export default PlayerController;
-
-// voices={this.props.voices}
-// voice={this.props.voice}
-// rate={this.props.rate}
-// text={this.props.text}
