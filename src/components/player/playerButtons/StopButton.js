@@ -5,15 +5,16 @@ class StopButton extends Component {
     super(props);
     this.cancel = this.cancel.bind(this);
   }
+
   cancel() {
+    // hides stop btn when playing
+    this.props.handleStopClick();
+
     window.speechSynthesis.cancel();
   }
+
   render() {
-    return (
-      <div>
-        <button onClick={this.cancel}>Stop</button>
-      </div>
-    );
+    return <button onClick={this.cancel}>Stop</button>;
   }
 }
 

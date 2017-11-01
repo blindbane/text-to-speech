@@ -5,15 +5,16 @@ class ResumeButton extends Component {
     super(props);
     this.resume = this.resume.bind(this);
   }
+
   resume() {
+    // hides resume btn when playing
+    this.props.handleResumeClick();
+
     window.speechSynthesis.resume();
   }
+
   render() {
-    return (
-      <div>
-        <button onClick={this.resume}>Resume</button>
-      </div>
-    );
+    return <button onClick={this.resume}>Resume</button>;
   }
 }
 

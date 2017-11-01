@@ -5,15 +5,16 @@ class PauseButton extends Component {
     super(props);
     this.pause = this.pause.bind(this);
   }
+
   pause() {
+    // hides pause btn when paused
+    this.props.handlePauseClick();
+
     window.speechSynthesis.pause();
   }
+
   render() {
-    return (
-      <div>
-        <button onClick={this.pause}>Pause</button>
-      </div>
-    );
+    return <button onClick={this.pause}>Pause</button>;
   }
 }
 
