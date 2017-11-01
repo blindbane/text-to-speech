@@ -1,0 +1,8 @@
+.Nav {
+  background-color: darkblue;
+}
+
+.Nav__link {
+  color: #fff;
+  text-decoration: none;
+}

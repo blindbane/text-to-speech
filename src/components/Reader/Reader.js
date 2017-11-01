@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Player from './player/Player';
+import './Reader.css';
+import Player from './../Player/Player';
 
 class Reader extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Reader extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Reader">
         <Player text={this.state.textAreaValue} />
         <div>
           <textarea
