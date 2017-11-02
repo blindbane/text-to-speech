@@ -1,19 +1,20 @@
-import React, { Component } from 'react';
-import './Reader.css';
-import Player from './../Player/Player';
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import "./Reader.css";
+import Player from "./../Player/Player";
 
 class Reader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      textAreaValue: 'Call me Ishmael.'
+      textAreaValue: "Call me Ishmael.",
     };
     this.handleTextInput = this.handleTextInput.bind(this);
   }
 
   handleTextInput(event) {
     this.setState({
-      textAreaValue: event.target.value
+      textAreaValue: event.target.value,
     });
   }
 
@@ -38,5 +39,11 @@ class Reader extends Component {
     );
   }
 }
+
+Reader.propTypes = {
+  voices: PropTypes.array.isRequired,
+  voice: PropTypes.object.isRequired,
+  handleVoiceSelect: PropTypes.func.isRequired,
+};
 
 export default Reader;

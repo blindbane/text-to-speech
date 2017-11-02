@@ -1,12 +1,12 @@
-import firebase from 'firebase';
+import firebase from "firebase";
 
-var config = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: ''
+const config = {
+  apiKey: "",
+  authDomain: "",
+  databaseURL: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
 };
 
 firebase.initializeApp(config);

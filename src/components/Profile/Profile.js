@@ -1,8 +1,9 @@
-import React from 'react';
-import { auth } from '../../firebase';
-import './Profile.css';
-import SignIn from '../SignIn/SignIn';
-import Button from '../shared/Button/Button';
+import React from "react";
+import PropTypes from "prop-types";
+import {auth} from "../../firebase";
+import "./Profile.css";
+import SignIn from "../SignIn/SignIn";
+import Button from "../shared/Button/Button";
 
 const Profile = props => (
   <div className="Profile">
@@ -21,5 +22,9 @@ const Profile = props => (
     )}
   </div>
 );
+
+Profile.propTypes = {
+  user: PropTypes.object.isRequired,
+};
 
 export default Profile;

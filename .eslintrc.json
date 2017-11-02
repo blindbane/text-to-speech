@@ -3,11 +3,17 @@
   "plugins": ["prettier"],
   "rules": {
     "react/forbid-prop-types": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
     "jsx-a11y/anchor-is-valid": [
       "error",
       {
-        "components": ["Link"]
+        "components": ["Link"],
+        "aspects": ["preferButton"]
       }
     ],
     "prettier/prettier": [

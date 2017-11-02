@@ -1,27 +1,21 @@
-import React, { Component } from 'react';
-import PlayerController from './PlayerController';
-import VoiceRateControl from './VoiceRateControl';
-import SelectVoiceControl from './SelectVoiceControl';
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import PlayerController from "./PlayerController";
+import VoiceRateControl from "./VoiceRateControl";
+import SelectVoiceControl from "./SelectVoiceControl";
 
 class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rate: 1
+      rate: 1,
     };
-    // this.handleVoiceSelect = this.handleVoiceSelect.bind(this);
+
     this.handleRateChange = this.handleRateChange.bind(this);
   }
 
-  // handleVoiceSelect(event) {
-  //   const newVoice = this.props.voices.find(
-  //     voice => voice.name === event.target.value
-  //   );
-  //   this.setState({ voice: newVoice });
-  // }
-
   handleRateChange(event) {
-    this.setState({ rate: event.target.value });
+    this.setState({rate: event.target.value});
   }
 
   render() {
@@ -47,5 +41,12 @@ class Player extends Component {
     );
   }
 }
+
+Player.propTypes = {
+  voices: PropTypes.array.isRequired,
+  voice: PropTypes.object.isRequired,
+  text: PropTypes.string.isRequired,
+  handleVoiceSelect: PropTypes.string.isRequired,
+};
 
 export default Player;

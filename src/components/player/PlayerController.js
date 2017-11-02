@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import Button from './../shared/Button/Button.js';
-import synth from './speechUtils/SpeechSynth';
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import Button from "./../shared/Button/Button";
+import synth from "./speechUtils/SpeechSynth";
 
-import createSpeechUtterance from './speechUtils/createSpeechUtterance';
+import createSpeechUtterance from "./speechUtils/createSpeechUtterance";
 
 class PlayerController extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isPlaying: false,
-      isPaused: false
+      isPaused: false,
     };
     this.play = this.play.bind(this);
     this.stop = this.stop.bind(this);
@@ -19,7 +20,7 @@ class PlayerController extends Component {
 
   play(utterance) {
     this.setState({
-      isPlaying: true
+      isPlaying: true,
     });
     synth.play(utterance);
   }
@@ -27,35 +28,35 @@ class PlayerController extends Component {
   stop() {
     this.setState({
       isPlaying: false,
-      isPaused: false
+      isPaused: false,
     });
     synth.stop();
   }
 
   pause() {
     this.setState({
-      isPaused: true
+      isPaused: true,
     });
     synth.pause();
   }
 
   resume() {
     this.setState({
-      isPaused: false
+      isPaused: false,
     });
     synth.resume();
   }
 
   render() {
-    const { text, rate, voice, voices } = this.props;
+    const {text, rate, voice, voices} = this.props;
     const utterance = createSpeechUtterance(
       text,
       rate,
       voice,
       voices,
-      this.stop
+      this.stop,
     );
-    const { isPaused, isPlaying } = this.state;
+    const {isPaused, isPlaying} = this.state;
     return (
       <div>
         {!isPlaying && (
@@ -72,5 +73,12 @@ class PlayerController extends Component {
     );
   }
 }
+
+PlayerController.propTypes = {
+  text: PropTypes.string.isRequired,
+  rate: PropTypes.number.isRequired,
+  voices: PropTypes.array.isRequired,
+  voice: PropTypes.object.isRequired,
+};
 
 export default PlayerController;

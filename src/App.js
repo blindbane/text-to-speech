@@ -1,5 +1,6 @@
+/* eslint react/no-did-mount-set-state: "off" */
+
 import React, {Component} from "react";
-import PropTypes from "prop-types";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {auth} from "./firebase";
 import "./App.css";
@@ -14,7 +15,7 @@ class App extends Component {
     this.userRef = null;
     this.state = {
       user: null,
-      voices: this.props.voices,
+      voices: [],
       voice: null,
     };
     this.handleVoiceSelect = this.handleVoiceSelect.bind(this);
@@ -26,6 +27,17 @@ class App extends Component {
         user: currentUser,
       });
     });
+
+    // gets voices on client's computer
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        const voices = window.speechSynthesis.getVoices();
+        this.setState({voices, voice: voices[0]});
+      };
+    } else {
+      const voices = window.speechSynthesis.getVoices();
+      this.setState({voices, voice: voices[0]});
+    }
   }
 
   handleVoiceSelect(event) {
@@ -61,9 +73,5 @@ class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  voices: PropTypes.array.isRequired,
-};
 
 export default App;
