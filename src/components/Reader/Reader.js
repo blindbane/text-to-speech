@@ -20,7 +20,12 @@ class Reader extends Component {
   render() {
     return (
       <div className="Reader">
-        <Player text={this.state.textAreaValue} />
+        <Player
+          text={this.state.textAreaValue}
+          voices={this.props.voices}
+          voice={this.props.voice}
+          handleVoiceSelect={this.props.handleVoiceSelect}
+        />
         <div>
           <textarea
             onChange={this.handleTextInput}

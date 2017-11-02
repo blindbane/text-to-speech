@@ -12,8 +12,11 @@ class App extends Component {
     this.usersRef = null;
     this.userRef = null;
     this.state = {
-      user: null
+      user: null,
+      voices: [],
+      voice: null
     };
+    this.handleVoiceSelect = this.handleVoiceSelect.bind(this);
   }
 
   componentDidMount() {
@@ -23,17 +26,45 @@ class App extends Component {
         user: currentUser
       });
     });
+
+    // gets voices on client's computer
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        const voices = window.speechSynthesis.getVoices();
+        this.setState({ voices, voice: voices[0] });
+      };
+    } else {
+      const voices = window.speechSynthesis.getVoices();
+      this.setState({ voices, voice: voices[0] });
+    }
+  }
+
+  handleVoiceSelect(event) {
+    const newVoice = this.state.voices.find(
+      voice => voice.name === event.target.value
+    );
+    this.setState({ voice: newVoice });
   }
 
   render() {
-    const { user } = this.state;
+    const { user, voices, voice } = this.state;
 
     return (
       <Router>
         <div className="App">
           <Nav />
           <Switch>
-            <Route exact path="/" component={Reader} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Reader
+                  voices={voices}
+                  voice={voice}
+                  handleVoiceSelect={this.handleVoiceSelect}
+                />
+              )}
+            />
             <Route path="/profile" render={() => <Profile user={user} />} />
           </Switch>
         </div>
