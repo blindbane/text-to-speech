@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { auth } from './firebase';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './App.css';
-import Nav from './components/Nav/Nav';
-import Reader from './components/Reader/Reader';
-import Profile from './components/Profile/Profile';
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {auth} from "./firebase";
+import "./App.css";
+import Nav from "./components/Nav/Nav";
+import Reader from "./components/Reader/Reader";
+import Profile from "./components/Profile/Profile";
 
 class App extends Component {
   constructor(props) {
@@ -13,41 +14,29 @@ class App extends Component {
     this.userRef = null;
     this.state = {
       user: null,
-      voices: [],
-      voice: null
+      voices: this.props.voices,
+      voice: null,
     };
     this.handleVoiceSelect = this.handleVoiceSelect.bind(this);
   }
 
   componentDidMount() {
     auth.onAuthStateChanged(currentUser => {
-      console.log(currentUser);
       this.setState({
-        user: currentUser
+        user: currentUser,
       });
     });
-
-    // gets voices on client's computer
-    if (window.speechSynthesis.onvoiceschanged !== undefined) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        const voices = window.speechSynthesis.getVoices();
-        this.setState({ voices, voice: voices[0] });
-      };
-    } else {
-      const voices = window.speechSynthesis.getVoices();
-      this.setState({ voices, voice: voices[0] });
-    }
   }
 
   handleVoiceSelect(event) {
     const newVoice = this.state.voices.find(
-      voice => voice.name === event.target.value
+      voice => voice.name === event.target.value,
     );
-    this.setState({ voice: newVoice });
+    this.setState({voice: newVoice});
   }
 
   render() {
-    const { user, voices, voice } = this.state;
+    const {user, voices, voice} = this.state;
 
     return (
       <Router>
@@ -72,5 +61,9 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  voices: PropTypes.array.isRequired,
+};
 
 export default App;
