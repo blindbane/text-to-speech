@@ -1,16 +1,28 @@
 {
-  "extends": ["react-app", "airbnb", "prettier", "prettier/react"],
+  "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": [
       "error",
       {
-        "singleQuote": true,
+        "singleQuote": false,
         "trailingComma": "all",
         "bracketSpacing": false,
         "jsxBracketSameLine": true,
         "parser": "flow"
       }
     ]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
   }
 }
